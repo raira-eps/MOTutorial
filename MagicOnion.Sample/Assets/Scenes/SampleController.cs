@@ -10,13 +10,13 @@ public class SampleController : MonoBehaviour
     private Channel channel;
     private ISampleService sampleService;
     private ISampleHub sampleHub;
-    private ISampleHubReceiver sampleHubReceiver;
+    //private ISampleHubReceiver sampleHubReceiver;
 
     void Start()
     {
         this.channel = new Channel("localhost:12345", ChannelCredentials.Insecure);
         this.sampleService = MagicOnionClient.Create<ISampleService>(channel);
-        this.sampleHub = StreamingHubClient.Connect<ISampleHub, ISampleHubReceiver>(this.channel, this.sampleHubReceiver);
+        this.sampleHub = StreamingHubClient.Connect<ISampleHub, ISampleHubReceiver>(this.channel, this);
 
         //普通のAPI呼び出し
         //this.SampleServiceTest(1,2);
